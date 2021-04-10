@@ -1,4 +1,4 @@
-using Unity.Entities;
+ï»¿using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
 
@@ -14,16 +14,18 @@ public class ServerRpcReceiveSystem : ComponentSystem
             var ghostCollection = GetSingletonEntity<GhostPrefabCollectionComponent>();
             var prefab = Entity.Null;
             var prefabs = EntityManager.GetBuffer<GhostPrefabBuffer>(ghostCollection);
-            //²éÕÒÔ¤ÖÆÌå
+            // æŸ¥æ‰¾é¢„åˆ¶ä½“
             for (int ghostId = 0; ghostId < prefabs.Length; ++ghostId)
             {
                 if (EntityManager.HasComponent<RedCubeComponent>(prefabs[ghostId].Value))
                     prefab = prefabs[ghostId].Value;
             }
-            // ÊµÀý»¯
+            // å®žä¾‹åŒ–
             var player = EntityManager.Instantiate(prefab);
-            // ÉèÖÃÓµÓÐÕß
-            EntityManager.SetComponentData(player, new GhostOwnerComponent { NetworkId = EntityManager.GetComponentData<NetworkIdComponent>(req.SourceConnection).Value });
+            // ç½‘ç»œid
+            var networkId = EntityManager.GetComponentData<NetworkIdComponent>(req.SourceConnection).Value;
+            // è®¾ç½®æ‹¥æœ‰è€…
+            EntityManager.SetComponentData(player, new GhostOwnerComponent { NetworkId = networkId });
 
             PostUpdateCommands.DestroyEntity(entity);
 
