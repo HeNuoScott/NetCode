@@ -1,4 +1,4 @@
-using Unity.Entities;
+ï»¿using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
 
@@ -17,8 +17,26 @@ public class InputReleaseSkillSystem : ComponentSystem
             Debug.Log("InputSkills");
             var req = PostUpdateCommands.CreateEntity();
             PostUpdateCommands.AddComponent(req, new ReleaseSkillRequest() { skillId = (int)KeyCode.Space });
-            //Èç¹ûTargetConnectionÉèÖÃÎªEntity.Null£¬Ôò½«¹ã²¥¸ÃÏûÏ¢¡£ÔÚ¿Í»§¶ËÉÏ£¬Äú²»±ØÉèÖÃ´ËÖµ£¬ÒòÎªÄúÖ»»á½«Æä·¢ËÍµ½·şÎñÆ÷¡£
+            //å¦‚æœTargetConnectionè®¾ç½®ä¸ºEntity.Nullï¼Œåˆ™å°†å¹¿æ’­è¯¥æ¶ˆæ¯ã€‚åœ¨å®¢æˆ·ç«¯ä¸Šï¼Œæ‚¨ä¸å¿…è®¾ç½®æ­¤å€¼ï¼Œå› ä¸ºæ‚¨åªä¼šå°†å…¶å‘é€åˆ°æœåŠ¡å™¨ã€‚
             //PostUpdateCommands.AddComponent(req, new SendRpcCommandRequestComponent() {TargetConnection = Entity });
+            PostUpdateCommands.AddComponent(req, new SendRpcCommandRequestComponent());
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            var req = PostUpdateCommands.CreateEntity();
+            PostUpdateCommands.AddComponent(req, new ReleaseSkillRequest() { skillId = (int)KeyCode.Q });
+            PostUpdateCommands.AddComponent(req, new SendRpcCommandRequestComponent());
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            var req = PostUpdateCommands.CreateEntity();
+            PostUpdateCommands.AddComponent(req, new ReleaseSkillRequest() { skillId = (int)KeyCode.E });
+            PostUpdateCommands.AddComponent(req, new SendRpcCommandRequestComponent());
+        }
+        else if (Input.GetKeyUp(KeyCode.R))
+        {
+            var req = PostUpdateCommands.CreateEntity();
+            PostUpdateCommands.AddComponent(req, new ReleaseSkillRequest() { skillId = (int)KeyCode.R });
             PostUpdateCommands.AddComponent(req, new SendRpcCommandRequestComponent());
         }
     }
