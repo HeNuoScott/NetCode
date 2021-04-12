@@ -3,7 +3,7 @@ using Unity.NetCode;
 using UnityEngine;
 
 [UpdateInGroup(typeof(ClientSimulationSystemGroup))]
-public class InputReleaseSkillSystem : ComponentSystem
+public class ReleaseSkillSystem : ComponentSystem
 {
     protected override void OnCreate()
     {

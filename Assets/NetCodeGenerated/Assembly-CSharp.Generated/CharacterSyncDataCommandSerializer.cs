@@ -11,37 +11,37 @@ using Unity.Mathematics;
 
 namespace Assembly_CSharp.Generated
 {
-    public struct CharacterSyncInputDataSerializer : ICommandDataSerializer<CharacterSyncInputData>
+    public struct CharacterSyncDataSerializer : ICommandDataSerializer<CharacterSyncData>
     {
-        public void Serialize(ref DataStreamWriter writer, in CharacterSyncInputData data)
+        public void Serialize(ref DataStreamWriter writer, in CharacterSyncData data)
         {
             writer.WriteFloat(data.direction.x);
             writer.WriteFloat(data.direction.y);
             writer.WriteFloat(data.direction.z);
         }
 
-        public void Deserialize(ref DataStreamReader reader, ref CharacterSyncInputData data)
+        public void Deserialize(ref DataStreamReader reader, ref CharacterSyncData data)
         {
             data.direction.x = reader.ReadFloat();
             data.direction.y = reader.ReadFloat();
             data.direction.z = reader.ReadFloat();
         }
 
-        public void Serialize(ref DataStreamWriter writer, in CharacterSyncInputData data, in CharacterSyncInputData baseline, NetworkCompressionModel compressionModel)
+        public void Serialize(ref DataStreamWriter writer, in CharacterSyncData data, in CharacterSyncData baseline, NetworkCompressionModel compressionModel)
         {
             writer.WritePackedFloatDelta(data.direction.x, baseline.direction.x, compressionModel);
             writer.WritePackedFloatDelta(data.direction.y, baseline.direction.y, compressionModel);
             writer.WritePackedFloatDelta(data.direction.z, baseline.direction.z, compressionModel);
         }
 
-        public void Deserialize(ref DataStreamReader reader, ref CharacterSyncInputData data, in CharacterSyncInputData baseline, NetworkCompressionModel compressionModel)
+        public void Deserialize(ref DataStreamReader reader, ref CharacterSyncData data, in CharacterSyncData baseline, NetworkCompressionModel compressionModel)
         {
             data.direction.x = reader.ReadPackedFloatDelta(baseline.direction.x, compressionModel);
             data.direction.y = reader.ReadPackedFloatDelta(baseline.direction.y, compressionModel);
             data.direction.z = reader.ReadPackedFloatDelta(baseline.direction.z, compressionModel);
         }
     }
-    public class CharacterSyncInputDataSendCommandSystem : CommandSendSystem<CharacterSyncInputDataSerializer, CharacterSyncInputData>
+    public class CharacterSyncDataSendCommandSystem : CommandSendSystem<CharacterSyncDataSerializer, CharacterSyncData>
     {
         [BurstCompile]
         struct SendJob : IJobEntityBatch
@@ -58,7 +58,7 @@ namespace Assembly_CSharp.Generated
             ScheduleJobData(sendJob);
         }
     }
-    public class CharacterSyncInputDataReceiveCommandSystem : CommandReceiveSystem<CharacterSyncInputDataSerializer, CharacterSyncInputData>
+    public class CharacterSyncDataReceiveCommandSystem : CommandReceiveSystem<CharacterSyncDataSerializer, CharacterSyncData>
     {
         [BurstCompile]
         struct ReceiveJob : IJobEntityBatch

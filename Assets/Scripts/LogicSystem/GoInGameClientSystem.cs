@@ -8,19 +8,6 @@ using UnityEngine;
 [UpdateInGroup(typeof(ClientSimulationSystemGroup))]
 public class GoInGameClientSystem : ComponentSystem
 {
-    protected override void OnCreate()
-    {
-        Entity entity = EntityManager.CreateEntity(typeof(ClientServerTickRate));
-        EntityManager.SetName(entity, "ClientServerTickRate");
-        SetSingleton<ClientServerTickRate>(new ClientServerTickRate
-        {
-            MaxSimulationStepsPerFrame = 60,
-            NetworkTickRate = 60,
-            SimulationTickRate = 60,
-            TargetFrameRateMode = ClientServerTickRate.FrameRateMode.Auto
-        });
-    }
-
     protected override void OnUpdate()
     {
         //Debug.Log("Client Updata");

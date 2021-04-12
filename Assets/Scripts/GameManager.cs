@@ -4,7 +4,7 @@ using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
 
-public class GameMgr : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [Header("需要在场景中隐藏")]
     [SerializeField] private GameObject ShareData;

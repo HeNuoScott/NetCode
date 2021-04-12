@@ -1,4 +1,4 @@
 ﻿using Unity.Entities;
 
-[GenerateAuthoringComponent]
+[GenerateAuthoringComponent]// 角色标签
 public struct CharacterTag : IComponentData { }

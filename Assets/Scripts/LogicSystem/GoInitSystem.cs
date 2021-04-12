@@ -11,6 +11,19 @@ public class GoInitSystem : ComponentSystem
 {
     public Queue<Action> actions = new Queue<Action>();
 
+    protected override void OnCreate()
+    {
+        base.OnCreate();
+        EntityManager.CreateEntity(typeof(ClientServerTickRate));
+        SetSingleton<ClientServerTickRate>(new ClientServerTickRate
+        {
+            MaxSimulationStepsPerFrame = 60,
+            NetworkTickRate = 60,
+            SimulationTickRate = 60,
+            TargetFrameRateMode = ClientServerTickRate.FrameRateMode.Auto
+        });
+    }
+
     protected override void OnUpdate()
     {
         while (actions.Count > 0)
@@ -19,6 +32,7 @@ public class GoInitSystem : ComponentSystem
         }
     }
 }
+
 /// <summary>
 /// 修改默认引导,使其不自动创建客户端和服务端世界
 /// </summary>
@@ -37,5 +51,4 @@ public class CustomBootstrap : ClientServerBootstrap
         ScriptBehaviourUpdateOrder.UpdatePlayerLoop(world);
         return true;
     }
-
 }

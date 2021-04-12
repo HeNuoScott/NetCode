@@ -5,18 +5,6 @@ using System;
 [UpdateInGroup(typeof(ServerSimulationSystemGroup))]
 public class GoInGameServerSystem : ComponentSystem
 {
-    protected override void OnCreate()
-    {
-        Entity entity = EntityManager.CreateEntity(typeof(ClientServerTickRate));
-        EntityManager.SetName(entity, "ClientServerTickRate");
-        SetSingleton<ClientServerTickRate>(new ClientServerTickRate
-        {
-            MaxSimulationStepsPerFrame = 60,
-            NetworkTickRate = 60,
-            SimulationTickRate = 60,
-            TargetFrameRateMode = ClientServerTickRate.FrameRateMode.Auto
-        });
-    }
     protected override void OnUpdate()
     {
         //UnityEngine.Debug.Log("Server Updata");
@@ -35,7 +23,7 @@ public class GoInGameServerSystem : ComponentSystem
             var player = EntityManager.Instantiate(prefab);
             EntityManager.SetComponentData(player, new MovableComponent() { Speed = 1f });
             EntityManager.SetComponentData(player, new GhostOwnerComponent { NetworkId = EntityManager.GetComponentData<NetworkIdComponent>(reqSrc.SourceConnection).Value });
-            PostUpdateCommands.AddBuffer<CharacterSyncInputData>(player);
+            PostUpdateCommands.AddBuffer<CharacterSyncData>(player);
 
             PostUpdateCommands.SetComponent(reqSrc.SourceConnection, new CommandTargetComponent { targetEntity = player });
 
