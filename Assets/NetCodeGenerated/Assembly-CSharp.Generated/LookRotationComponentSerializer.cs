@@ -14,7 +14,7 @@ using Unity.Mathematics;
 namespace Assembly_CSharp.Generated
 {
     [BurstCompile]
-    public struct MovableComponentGhostComponentSerializer
+    public struct LookRotationComponentGhostComponentSerializer
     {
         static GhostComponentSerializer.State GetState()
         {
@@ -23,10 +23,10 @@ namespace Assembly_CSharp.Generated
             {
                 s_State = new GhostComponentSerializer.State
                 {
-                    GhostFieldsHash = 4379934046830037180,
+                    GhostFieldsHash = 11266163746584454747,
                     ExcludeFromComponentCollectionHash = 0,
-                    ComponentType = ComponentType.ReadWrite<MovableComponent>(),
-                    ComponentSize = UnsafeUtility.SizeOf<MovableComponent>(),
+                    ComponentType = ComponentType.ReadWrite<LookRotationComponent>(),
+                    ComponentSize = UnsafeUtility.SizeOf<LookRotationComponent>(),
                     SnapshotSize = UnsafeUtility.SizeOf<Snapshot>(),
                     ChangeMaskBits = ChangeMaskBits,
                     SendMask = GhostComponentSerializer.SendMask.Interpolated | GhostComponentSerializer.SendMask.Predicted,
@@ -61,12 +61,11 @@ namespace Assembly_CSharp.Generated
         public static GhostComponentSerializer.State State => GetState();
         public struct Snapshot
         {
-            public float Speed;
             public float Direction_x;
             public float Direction_y;
             public float Direction_z;
         }
-        public const int ChangeMaskBits = 2;
+        public const int ChangeMaskBits = 1;
         [BurstCompile]
         [MonoPInvokeCallback(typeof(GhostComponentSerializer.CopyToFromSnapshotDelegate))]
         private static void CopyToSnapshot(IntPtr stateData, IntPtr snapshotData, int snapshotOffset, int snapshotStride, IntPtr componentData, int componentStride, int count)
@@ -74,9 +73,8 @@ namespace Assembly_CSharp.Generated
             for (int i = 0; i < count; ++i)
             {
                 ref var snapshot = ref GhostComponentSerializer.TypeCast<Snapshot>(snapshotData, snapshotOffset + snapshotStride*i);
-                ref var component = ref GhostComponentSerializer.TypeCast<MovableComponent>(componentData, componentStride*i);
+                ref var component = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(componentData, componentStride*i);
                 ref var serializerState = ref GhostComponentSerializer.TypeCast<GhostSerializerState>(stateData, 0);
-                snapshot.Speed = component.Speed;
                 snapshot.Direction_x = component.Direction.x;
                 snapshot.Direction_y = component.Direction.y;
                 snapshot.Direction_z = component.Direction.z;
@@ -104,8 +102,7 @@ namespace Assembly_CSharp.Generated
                 deserializerState.SnapshotTick = snapshotInterpolationData.Tick;
                 float snapshotInterpolationFactorRaw = snapshotInterpolationData.InterpolationFactor;
                 float snapshotInterpolationFactor = snapshotInterpolationFactorRaw;
-                ref var component = ref GhostComponentSerializer.TypeCast<MovableComponent>(componentData, componentStride*i);
-                component.Speed = snapshotBefore.Speed;
+                ref var component = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(componentData, componentStride*i);
                 component.Direction = new float3(snapshotBefore.Direction_x, snapshotBefore.Direction_y, snapshotBefore.Direction_z);
 
             }
@@ -116,9 +113,8 @@ namespace Assembly_CSharp.Generated
         [MonoPInvokeCallback(typeof(GhostComponentSerializer.RestoreFromBackupDelegate))]
         private static void RestoreFromBackup(IntPtr componentData, IntPtr backupData)
         {
-            ref var component = ref GhostComponentSerializer.TypeCast<MovableComponent>(componentData, 0);
-            ref var backup = ref GhostComponentSerializer.TypeCast<MovableComponent>(backupData, 0);
-            component.Speed = backup.Speed;
+            ref var component = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(componentData, 0);
+            ref var backup = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(backupData, 0);
             component.Direction.x = backup.Direction.x;
             component.Direction.y = backup.Direction.y;
             component.Direction.z = backup.Direction.z;
@@ -139,11 +135,10 @@ namespace Assembly_CSharp.Generated
             ref var snapshot = ref GhostComponentSerializer.TypeCast<Snapshot>(snapshotData);
             ref var baseline = ref GhostComponentSerializer.TypeCast<Snapshot>(baselineData);
             uint changeMask;
-            changeMask = (snapshot.Speed != baseline.Speed) ? 1u : 0;
-            changeMask |= (snapshot.Direction_x != baseline.Direction_x) ? (1u<<1) : 0;
-            changeMask |= (snapshot.Direction_y != baseline.Direction_y) ? (1u<<1) : 0;
-            changeMask |= (snapshot.Direction_z != baseline.Direction_z) ? (1u<<1) : 0;
-            GhostComponentSerializer.CopyToChangeMask(bits, changeMask, startOffset, 2);
+            changeMask = (snapshot.Direction_x != baseline.Direction_x) ? 1u : 0;
+            changeMask |= (snapshot.Direction_y != baseline.Direction_y) ? (1u<<0) : 0;
+            changeMask |= (snapshot.Direction_z != baseline.Direction_z) ? (1u<<0) : 0;
+            GhostComponentSerializer.CopyToChangeMask(bits, changeMask, startOffset, 1);
         }
         [BurstCompile]
         [MonoPInvokeCallback(typeof(GhostComponentSerializer.SerializeDelegate))]
@@ -153,12 +148,10 @@ namespace Assembly_CSharp.Generated
             ref var baseline = ref GhostComponentSerializer.TypeCast<Snapshot>(baselineData);
             uint changeMask = GhostComponentSerializer.CopyFromChangeMask(changeMaskData, startOffset, ChangeMaskBits);
             if ((changeMask & (1 << 0)) != 0)
-                writer.WritePackedFloatDelta(snapshot.Speed, baseline.Speed, compressionModel);
-            if ((changeMask & (1 << 1)) != 0)
                 writer.WritePackedFloatDelta(snapshot.Direction_x, baseline.Direction_x, compressionModel);
-            if ((changeMask & (1 << 1)) != 0)
+            if ((changeMask & (1 << 0)) != 0)
                 writer.WritePackedFloatDelta(snapshot.Direction_y, baseline.Direction_y, compressionModel);
-            if ((changeMask & (1 << 1)) != 0)
+            if ((changeMask & (1 << 0)) != 0)
                 writer.WritePackedFloatDelta(snapshot.Direction_z, baseline.Direction_z, compressionModel);
         }
         [BurstCompile]
@@ -169,18 +162,14 @@ namespace Assembly_CSharp.Generated
             ref var baseline = ref GhostComponentSerializer.TypeCast<Snapshot>(baselineData);
             uint changeMask = GhostComponentSerializer.CopyFromChangeMask(changeMaskData, startOffset, ChangeMaskBits);
             if ((changeMask & (1 << 0)) != 0)
-                snapshot.Speed = reader.ReadPackedFloatDelta(baseline.Speed, compressionModel);
-            else
-                snapshot.Speed = baseline.Speed;
-            if ((changeMask & (1 << 1)) != 0)
                 snapshot.Direction_x = reader.ReadPackedFloatDelta(baseline.Direction_x, compressionModel);
             else
                 snapshot.Direction_x = baseline.Direction_x;
-            if ((changeMask & (1 << 1)) != 0)
+            if ((changeMask & (1 << 0)) != 0)
                 snapshot.Direction_y = reader.ReadPackedFloatDelta(baseline.Direction_y, compressionModel);
             else
                 snapshot.Direction_y = baseline.Direction_y;
-            if ((changeMask & (1 << 1)) != 0)
+            if ((changeMask & (1 << 0)) != 0)
                 snapshot.Direction_z = reader.ReadPackedFloatDelta(baseline.Direction_z, compressionModel);
             else
                 snapshot.Direction_z = baseline.Direction_z;
@@ -190,21 +179,15 @@ namespace Assembly_CSharp.Generated
         [MonoPInvokeCallback(typeof(GhostComponentSerializer.ReportPredictionErrorsDelegate))]
         private static void ReportPredictionErrors(IntPtr componentData, IntPtr backupData, ref UnsafeList<float> errors)
         {
-            ref var component = ref GhostComponentSerializer.TypeCast<MovableComponent>(componentData, 0);
-            ref var backup = ref GhostComponentSerializer.TypeCast<MovableComponent>(backupData, 0);
+            ref var component = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(componentData, 0);
+            ref var backup = ref GhostComponentSerializer.TypeCast<LookRotationComponent>(backupData, 0);
             int errorIndex = 0;
-            errors[errorIndex] = math.max(errors[errorIndex], math.abs(component.Speed - backup.Speed));
-            ++errorIndex;
             errors[errorIndex] = math.max(errors[errorIndex], math.distance(component.Direction, backup.Direction));
             ++errorIndex;
         }
         private static int GetPredictionErrorNames(ref FixedString512 names)
         {
             int nameCount = 0;
-            if (nameCount != 0)
-                names.Append(new FixedString32(","));
-            names.Append(new FixedString64("Speed"));
-            ++nameCount;
             if (nameCount != 0)
                 names.Append(new FixedString32(","));
             names.Append(new FixedString64("Direction"));

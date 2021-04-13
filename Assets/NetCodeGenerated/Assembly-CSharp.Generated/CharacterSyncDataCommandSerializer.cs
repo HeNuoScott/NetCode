@@ -15,30 +15,26 @@ namespace Assembly_CSharp.Generated
     {
         public void Serialize(ref DataStreamWriter writer, in CharacterSyncData data)
         {
-            writer.WriteFloat(data.direction.x);
-            writer.WriteFloat(data.direction.y);
-            writer.WriteFloat(data.direction.z);
+            writer.WriteFloat(data.Horizontal);
+            writer.WriteFloat(data.Vertical);
         }
 
         public void Deserialize(ref DataStreamReader reader, ref CharacterSyncData data)
         {
-            data.direction.x = reader.ReadFloat();
-            data.direction.y = reader.ReadFloat();
-            data.direction.z = reader.ReadFloat();
+            data.Horizontal = reader.ReadFloat();
+            data.Vertical = reader.ReadFloat();
         }
 
         public void Serialize(ref DataStreamWriter writer, in CharacterSyncData data, in CharacterSyncData baseline, NetworkCompressionModel compressionModel)
         {
-            writer.WritePackedFloatDelta(data.direction.x, baseline.direction.x, compressionModel);
-            writer.WritePackedFloatDelta(data.direction.y, baseline.direction.y, compressionModel);
-            writer.WritePackedFloatDelta(data.direction.z, baseline.direction.z, compressionModel);
+            writer.WritePackedFloatDelta(data.Horizontal, baseline.Horizontal, compressionModel);
+            writer.WritePackedFloatDelta(data.Vertical, baseline.Vertical, compressionModel);
         }
 
         public void Deserialize(ref DataStreamReader reader, ref CharacterSyncData data, in CharacterSyncData baseline, NetworkCompressionModel compressionModel)
         {
-            data.direction.x = reader.ReadPackedFloatDelta(baseline.direction.x, compressionModel);
-            data.direction.y = reader.ReadPackedFloatDelta(baseline.direction.y, compressionModel);
-            data.direction.z = reader.ReadPackedFloatDelta(baseline.direction.z, compressionModel);
+            data.Horizontal = reader.ReadPackedFloatDelta(baseline.Horizontal, compressionModel);
+            data.Vertical = reader.ReadPackedFloatDelta(baseline.Vertical, compressionModel);
         }
     }
     public class CharacterSyncDataSendCommandSystem : CommandSendSystem<CharacterSyncDataSerializer, CharacterSyncData>

@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 986294808033752129}
   - component: {fileID: -8909915848893888759}
   - component: {fileID: 4831517257958001658}
+  - component: {fileID: -928878143722582182}
   m_Layer: 0
   m_Name: CharacterTemplate
   m_TagString: Untagged
@@ -427,4 +428,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0
-  isCanMove: 0
+  Direction:
+    x: 0
+    y: 0
+    z: 0
+--- !u!114 &-928878143722582182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8613407370786461013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0489ee3612aa149ab04ba803d2b011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0
+  Direction:
+    x: 0
+    y: 0
+    z: 0

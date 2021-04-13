@@ -1,14 +1,13 @@
-锘縰sing Unity.Mathematics;
+using Unity.Mathematics;
 using Unity.Entities;
 using Unity.NetCode;
+
 /// <summary>
-/// 鍙互绉诲姩缁勪欢
+/// 看向一个方向的组件
 /// </summary>
 [GenerateAuthoringComponent]
-public struct MovableComponent : IComponentData
+public struct LookRotationComponent : IComponentData
 {
-    [GhostField]
-    public float Speed;
     [GhostField]
     public float3 Direction;
 }

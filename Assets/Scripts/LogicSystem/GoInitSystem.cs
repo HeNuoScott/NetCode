@@ -40,6 +40,8 @@ public class CustomBootstrap : ClientServerBootstrap
 {
     public override bool Initialize(string defaultWorldName)
     {
+        TypeManager.Initialize();
+
         var systems = DefaultWorldInitialization.GetAllSystems(WorldSystemFilterFlags.Default);
         GenerateSystemLists(systems);
 

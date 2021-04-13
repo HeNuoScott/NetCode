@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using Unity.NetCode;
 using UnityEngine;
 [UpdateInGroup(typeof(ClientSimulationSystemGroup))]
-public class CharacterMoveInputSystem : ComponentSystem
+public class CharacterInputSystem : ComponentSystem
 {
     protected override void OnCreate()
     {
@@ -30,8 +30,9 @@ public class CharacterMoveInputSystem : ComponentSystem
 
         var input = default(CharacterSyncData);
         input.Tick = World.GetExistingSystem<ClientSimulationSystemGroup>().ServerTick;
-        float2 curInput = new float2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input.direction = new float3(curInput.x, 0, curInput.y);
+
+        input.Horizontal = Input.GetAxis("Horizontal");
+        input.Vertical = Input.GetAxis("Vertical");
         var inputBuffer = EntityManager.GetBuffer<CharacterSyncData>(localInputDataEntity);
         inputBuffer.AddCommandData(input);
     }
