@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 8948759365636405300}
   - component: {fileID: 8948759365636405303}
   - component: {fileID: 8948759365636405302}
-  - component: {fileID: -995806645123526779}
+  - component: {fileID: 183762402466540238}
   - component: {fileID: 8327158142092075343}
   - component: {fileID: -6376704150113048082}
   m_Layer: 0
-  m_Name: RedCube
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-995806645123526779
+--- !u!114 &183762402466540238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,10 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8948759365636405297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e51148c8dcb1ff1419ab545ec689d555, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a87245894bb48a4dbc8d158c7b7a8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExampleValue: 0
 --- !u!114 &8327158142092075343
 MonoBehaviour:
   m_ObjectHideFlags: 0
