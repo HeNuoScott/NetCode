@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 8948759365636405301}
   - component: {fileID: 8948759365636405300}
   - component: {fileID: 8948759365636405303}
-  - component: {fileID: 8948759365636405302}
   - component: {fileID: 183762402466540238}
   - component: {fileID: 8327158142092075343}
   - component: {fileID: -6376704150113048082}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletPerfab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8948759365636405297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8948759365636405297}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8948759365636405303
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8948759365636405302
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8948759365636405297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &183762402466540238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +115,7 @@ MonoBehaviour:
   OptimizationMode: 0
   Importance: 1
   prefabId: 265e0287d6692f743a3070aadbd6a86e
-  Name: RedCube
+  Name: Bullet
   RefGameObjects: []
   ComponentNames: []
   PrefabTypeOverrides: []

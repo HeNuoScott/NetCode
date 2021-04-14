@@ -13,7 +13,6 @@ public class ServerRpcReceiveSystem : ComponentSystem
         {
             if (cmd.skillId==(int)KeyCode.Space)
             {
-                Debug.LogError("We received a command!    KeyCode.Space");
                 var ghostCollection = GetSingletonEntity<GhostPrefabCollectionComponent>();
                 var prefab = Entity.Null;
                 var prefabs = EntityManager.GetBuffer<GhostPrefabBuffer>(ghostCollection);
@@ -32,9 +31,14 @@ public class ServerRpcReceiveSystem : ComponentSystem
                 EntityManager.AddComponent<CutTimerComponent>(bullet);
                 EntityManager.AddComponent<MovableComponent>(bullet);
                 var sendCharacter = EntityManager.GetComponentData<CommandTargetComponent>(req.SourceConnection).targetEntity;
+                var pos = EntityManager.GetComponentData<Translation>(sendCharacter);
                 var dir = EntityManager.GetComponentData<Rotation>(sendCharacter);
+                var direction = math.forward(dir.Value);
                 EntityManager.SetComponentData(bullet, new CutTimerComponent() { Time = 2f });
-                EntityManager.SetComponentData(bullet, new MovableComponent() { Speed = 10f, Direction = math.forward(dir.Value) });
+                EntityManager.SetComponentData(bullet, new Translation() { Value = new float3(pos.Value.x, pos.Value.y + 1.5f, pos.Value.z) });
+                EntityManager.SetComponentData(bullet, new Rotation() { Value = quaternion.LookRotation(direction, new float3(0, 1, 0))});
+                EntityManager.SetComponentData(bullet, new MovableComponent() { Speed = 50f, Direction = direction });
+                //EntityManager.SetName(bullet, "Bullet");
             }
             else if (cmd.skillId == (int)KeyCode.Q)
             {
