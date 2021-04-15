@@ -15,17 +15,17 @@ public class GameManager : MonoBehaviour
 
         World.DefaultGameObjectInjectionWorld.GetExistingSystem<GoInitSystem>().actions.Enqueue(() =>
         {
-#if UNITY_EDITOR
-            // 创建服务端世界
-            var serverWorld = ClientServerBootstrap.CreateServerWorld(World.DefaultGameObjectInjectionWorld, "ServerWorld");
-            // 创建客户端世界
-            var clientWorld = ClientServerBootstrap.CreateClientWorld(World.DefaultGameObjectInjectionWorld, "ClientWorld");
-#elif UNITY_CLIENT
+#if UNITY_CLIENT
             // 创建客户端世界
             var clientWorld = ClientServerBootstrap.CreateClientWorld(World.DefaultGameObjectInjectionWorld, "ClientWorld");
 #elif UNITY_SERVER
             // 创建服务端世界
             var serverWorld = ClientServerBootstrap.CreateServerWorld(World.DefaultGameObjectInjectionWorld, "ServerWorld");
+#elif UNITY_EDITOR
+            // 创建服务端世界
+            var serverWorld = ClientServerBootstrap.CreateServerWorld(World.DefaultGameObjectInjectionWorld, "ServerWorld");
+            // 创建客户端世界
+            var clientWorld = ClientServerBootstrap.CreateClientWorld(World.DefaultGameObjectInjectionWorld, "ClientWorld");
 #endif
         });
 

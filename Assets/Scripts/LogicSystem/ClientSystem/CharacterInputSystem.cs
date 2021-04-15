@@ -7,6 +7,7 @@ public class CharacterInputSystem : ComponentSystem
 {
     protected override void OnCreate()
     {
+        // 设置单例在Updata中可直接获得(系统要是用单例,在系统初始化时添加此设置)
         RequireSingletonForUpdate<NetworkIdComponent>();
     }
 
@@ -30,7 +31,6 @@ public class CharacterInputSystem : ComponentSystem
 
         var input = default(CharacterSyncData);
         input.Tick = World.GetExistingSystem<ClientSimulationSystemGroup>().ServerTick;
-
         input.Horizontal = Input.GetAxis("Horizontal");
         input.Vertical = Input.GetAxis("Vertical");
         var inputBuffer = EntityManager.GetBuffer<CharacterSyncData>(localInputDataEntity);
