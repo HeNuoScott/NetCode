@@ -1,10 +1,8 @@
-﻿using Unity.Mathematics;
+using Unity.Mathematics;
 using Unity.Entities;
 using Unity.NetCode;
-/// <summary>
-/// 可以移动组件
-/// </summary>
-[GenerateAuthoringComponent]
+
+[GenerateAuthoringComponent] // 可以移动组件
 public struct MovableComponent : IComponentData
 {
     [GhostField]

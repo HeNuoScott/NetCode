@@ -8,12 +8,12 @@ public class CheckBulletDeleteSystem : JobComponentSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDependencies)
     {
-        /*²»½¨Òé
-         * WithStructuralChanges»áÍÏÂıÏß³Ì
-         * Ö±½ÓÀûÓÃ EntityManager.DestroyEntity(entity) É¾³ıÊµÌå
+        /*ä¸å»ºè®®
+         * WithStructuralChangesä¼šæ‹–æ…¢çº¿ç¨‹
+         * ç›´æ¥åˆ©ç”¨ EntityManager.DestroyEntity(entity) åˆ é™¤å®ä½“
          float deltaTime = Time.DeltaTime;
-         Entities.WithAll<BulletTag>()//Ö±½ÓÌáÈ¡ËùÓĞ°üº¬BulletTag±êÇ©µÄentity
-                 .WithStructuralChanges()//½á¹¹Êı¾İ»¯¸Ä±äµÄ±ØĞëÌí¼Ó£¬ÀıÈçÉ¾³ıenity
+         Entities.WithAll<BulletTag>()//ç›´æ¥æå–æ‰€æœ‰åŒ…å«BulletTagæ ‡ç­¾çš„entity
+                 .WithStructuralChanges()//ç»“æ„æ•°æ®åŒ–æ”¹å˜çš„å¿…é¡»æ·»åŠ ï¼Œä¾‹å¦‚åˆ é™¤enity
                  .WithNone<DeleteTag>()
                  .WithBurst()
                  .ForEach((Entity entity, in CutTimerComponent cutTimer) =>
@@ -36,4 +36,5 @@ public class CheckBulletDeleteSystem : JobComponentSystem
         commandBuffer.Dispose();
         return default;
     }
+
 }

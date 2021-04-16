@@ -2,10 +2,7 @@ using Unity.Mathematics;
 using Unity.Entities;
 using Unity.NetCode;
 
-/// <summary>
-/// 看向一个方向的组件
-/// </summary>
-[GenerateAuthoringComponent]
+[GenerateAuthoringComponent] // 鐪嬪悜涓�涓柟鍚戠殑缁勪欢
 public struct LookRotationComponent : IComponentData
 {
     [GhostField]

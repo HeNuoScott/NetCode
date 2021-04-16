@@ -1,6 +1,9 @@
-﻿using Unity.NetCode;
+using Unity.NetCode;
 using Unity.Mathematics;
 
+/// <summary>
+/// 玩家同步数据
+/// </summary>
 public struct CharacterSyncData : ICommandData
 {
     /// <summary> 预测标记,用于表明此帧操作是预测 还是实际操作 </summary>

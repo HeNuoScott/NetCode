@@ -15,8 +15,9 @@ public class TranslationSystem : SystemBase
         float deltaTime = Time.DeltaTime;
         Entities.ForEach((ref Translation translation, in MovableComponent movable) =>
         {
-            // Ö´ĞĞÎ»ÖÃÒÆ¶¯
+            // æ‰§è¡Œä½ç½®ç§»åŠ¨
             translation.Value += movable.Direction * movable.Speed * deltaTime;
         }).Schedule();
     }
+
 }

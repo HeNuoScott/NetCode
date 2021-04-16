@@ -32,25 +32,3 @@ public class GoInitSystem : ComponentSystem
         }
     }
 }
-
-/// <summary>
-/// 修改默认引导,使其不自动创建客户端和服务端世界
-/// </summary>
-public class CustomBootstrap : ClientServerBootstrap
-{
-    public override bool Initialize(string defaultWorldName)
-    {
-        TypeManager.Initialize();
-
-        var systems = DefaultWorldInitialization.GetAllSystems(WorldSystemFilterFlags.Default);
-        GenerateSystemLists(systems);
-
-        var world = new World(defaultWorldName);
-        World.DefaultGameObjectInjectionWorld = world;
-
-        DefaultWorldInitialization.AddSystemsToRootLevelSystemGroups(world, ExplicitDefaultWorldSystems);
-#pragma warning disable 0618
-        ScriptBehaviourUpdateOrder.UpdatePlayerLoop(world);
-        return true;
-    }
-}

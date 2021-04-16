@@ -1,4 +1,4 @@
 using Unity.Entities;
 
-[GenerateAuthoringComponent] // ×Óµ¯±êÇ©
+[GenerateAuthoringComponent] // å­å¼¹ æ ‡ç­¾
 public struct BulletTag : IComponentData { }

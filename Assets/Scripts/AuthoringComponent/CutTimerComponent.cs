@@ -1,6 +1,6 @@
 using Unity.Entities;
 
-[GenerateAuthoringComponent]
+[GenerateAuthoringComponent] // 计时 数据
 public struct CutTimerComponent : IComponentData
 {
     public float Time;

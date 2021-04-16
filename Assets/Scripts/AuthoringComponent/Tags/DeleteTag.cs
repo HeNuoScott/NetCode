@@ -1,4 +1,4 @@
 using Unity.Entities;
 
-[GenerateAuthoringComponent]
+[GenerateAuthoringComponent]// 删除 标签
 public struct DeleteTag : IComponentData { }

@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 
-[GenerateAuthoringComponent]// 角色标签
+[GenerateAuthoringComponent]// 角色 标签
 public struct CharacterTag : IComponentData { }
