@@ -1,8 +1,7 @@
-using Unity.NetCode;
-using Unity.Mathematics;
+﻿using Unity.NetCode;
 
 /// <summary>
-/// 玩家同步数据
+/// 玩家同步数据 ICommandData交互数据
 /// </summary>
 public struct CharacterSyncData : ICommandData
 {

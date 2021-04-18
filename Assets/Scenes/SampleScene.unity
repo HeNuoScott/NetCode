@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConversionMode: 0
-  ConversionTarget: -1
+  ConversionTarget: 2147483647
   canDestroy: 0
 --- !u!1 &7341722048985713799
 GameObject:

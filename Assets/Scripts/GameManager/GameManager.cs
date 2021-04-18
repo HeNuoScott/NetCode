@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
+using Unity.Scenes;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("需要在场景中隐藏")]
-    [SerializeField] private GameObject ShareData;
+    public GameObject ShareData;
 
     private void Start()
     {
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
 
         World.DefaultGameObjectInjectionWorld.GetExistingSystem<GoInitSystem>().actions.Enqueue(() =>
         {
-            //必须立即初始化GhostPrefabCollectionComponent组件 不然在服务器初始化和客户端初始化是找不到对应的共享预制体
             ShareData.SetActive(true);
             foreach (var world in World.All)
             {
