@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd28b3357f03e37488d1798a0a818ba6, type: 3}
   m_Name: ServerConfiguration
   m_EditorClassIdentifier: 
-  lanHostName: LocalHost
-  listenerPort: 8950
-  lanDiscoveryRequest: PING
-  lanDiscoveryResponse: PONG
+  lanHostName: 
+  listenerPort: 0
+  lanDiscoveryRequest: 
+  lanDiscoveryResponse: 

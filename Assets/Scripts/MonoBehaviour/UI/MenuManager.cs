@@ -12,47 +12,45 @@ public interface IMenu
 
 public class MenuManager : MonoBehaviour
 {
-    //[SerializeField] private MainMenu mainMenu;
-    //[SerializeField] private JoinGameMenu joinGameMenu;
-    //[SerializeField] private JoinLanMenu joinLanMenu;
-    //[SerializeField] private JoinOnlineMenu joinOnlineMenu;
-    //[SerializeField] private HostGameMenu hostGameMenu;
-    //[SerializeField] private CreditsScreen creditsScreen;
+    [SerializeField] private MainMenu mainMenu;
+    [SerializeField] private JoinGameMenu joinGameMenu;
+    [SerializeField] private JoinLanMenu joinLanMenu;
+    [SerializeField] private JoinOnlineMenu joinOnlineMenu;
+    [SerializeField] private HostGameMenu hostGameMenu;
 
-    //private Dictionary<Type, IMenu> menuDictonary = new Dictionary<Type, IMenu>();
+    private Dictionary<Type, IMenu> menuDictonary = new Dictionary<Type, IMenu>();
 
-    //private IMenu selectedMenu;
+    private IMenu selectedMenu;
 
-    //private void Awake()
-    //{
-    //    GameSession.clientSession = null;
-    //    GameSession.serverSession = null;
+    private void Awake()
+    {
+        GameSession.clientSession = null;
+        GameSession.serverSession = null;
 
-    //    selectedMenu = mainMenu;
-    //}
+        selectedMenu = mainMenu;
+    }
 
-    //private void Start()
-    //{
-    //    menuDictonary.Add(mainMenu.GetType(), mainMenu);
-    //    menuDictonary.Add(joinGameMenu.GetType(), joinGameMenu);
-    //    menuDictonary.Add(joinLanMenu.GetType(), joinLanMenu);
-    //    menuDictonary.Add(joinOnlineMenu.GetType(), joinOnlineMenu);
-    //    menuDictonary.Add(hostGameMenu.GetType(), hostGameMenu);
-    //    menuDictonary.Add(creditsScreen.GetType(), creditsScreen);
+    private void Start()
+    {
+        menuDictonary.Add(mainMenu.GetType(), mainMenu);
+        menuDictonary.Add(joinGameMenu.GetType(), joinGameMenu);
+        menuDictonary.Add(joinLanMenu.GetType(), joinLanMenu);
+        menuDictonary.Add(joinOnlineMenu.GetType(), joinOnlineMenu);
+        menuDictonary.Add(hostGameMenu.GetType(), hostGameMenu);
 
-    //    foreach (var pair in menuDictonary)
-    //    {
-    //        pair.Value.Init();
-    //        pair.Value.Exit();
-    //    }
+        foreach (var pair in menuDictonary)
+        {
+            pair.Value.Init();
+            pair.Value.Exit();
+        }
         
-    //    selectedMenu.Enter();
-    //}
+        selectedMenu.Enter();
+    }
 
-    //public void SelectMenu<T>() where T : IMenu
-    //{
-    //    selectedMenu.Exit();
-    //    selectedMenu = menuDictonary[typeof(T)];
-    //    selectedMenu.Enter();
-    //}
+    public void SelectMenu<T>() where T : IMenu
+    {
+        selectedMenu.Exit();
+        selectedMenu = menuDictonary[typeof(T)];
+        selectedMenu.Enter();
+    }
 }

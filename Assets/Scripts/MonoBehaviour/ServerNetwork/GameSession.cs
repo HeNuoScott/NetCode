@@ -20,13 +20,6 @@ public class ClientSession
     public UInt16 remoteServerPort;
 }
 
-/// <summary> 发现结果 </summary>
-public struct DiscoveryResult
-{
-    public string HostName;
-    public UInt16 RemoteServerPort;
-    public string RemoteServerIpAddress;
-}
 /// <summary> 网络身份 </summary>
 public struct NetworkIdentity
 {

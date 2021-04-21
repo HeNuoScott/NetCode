@@ -1,4 +1,5 @@
 ﻿using System.Net.Sockets;
+using Unity.Entities;
 using UnityEngine;
 using System.Text;
 using System.Net;
@@ -13,9 +14,21 @@ public class NetworkListener : MonoBehaviour
 
     private UdpClient listener;
 
+    private GoInGameServerSystem goInGameServerSystem;
+
     private void Start()
     {
         listener = new UdpClient(serverConfiguration.listenerPort);
+
+        foreach (var world in World.All)
+        {
+            var goInGameServerSystem = world.GetExistingSystem<GoInGameServerSystem>();
+            if (goInGameServerSystem != null)
+            {
+                this.goInGameServerSystem = goInGameServerSystem;
+                break;
+            }
+        }
     }
 
     private void Update()
@@ -27,9 +40,9 @@ public class NetworkListener : MonoBehaviour
 
             Debug.Log("Received " + receivedMessage + " from address: " + remoteEndpoint.Address);
 
-            byte[] response = Encoding.ASCII.GetBytes(serverConfiguration.lanDiscoveryResponse + " " + serverConfiguration.lanHostName + " " + serverConfiguration.listenerPort);
+            byte[] response = Encoding.ASCII.GetBytes(serverConfiguration.lanDiscoveryResponse + " " + GameSession.serverSession.serverPort + " " + goInGameServerSystem.connectedPlayers + " " + GameSession.serverSession.numberOfPlayers + " " + GameSession.serverSession.laps + " " + GameSession.serverSession.hostName);
 
-            if (receivedMessage.Equals(serverConfiguration.lanDiscoveryRequest))
+            if (goInGameServerSystem.connectedPlayers < GameSession.serverSession.numberOfPlayers && receivedMessage.Equals(serverConfiguration.lanDiscoveryRequest))
             {
                 listener.Send(response, response.Length, remoteEndpoint);
             }
