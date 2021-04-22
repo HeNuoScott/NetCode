@@ -7,8 +7,6 @@ public class JoinGameMenu : MonoBehaviour, IMenu
 {
     [SerializeField] private MenuManager menuManager;
 
-    [SerializeField] private Canvas joinGameMenuCanvas;
-
     [SerializeField] private Button lanButton;
     [SerializeField] private Button onlineButton;
     [SerializeField] private Button cancelButton;
@@ -33,11 +31,11 @@ public class JoinGameMenu : MonoBehaviour, IMenu
 
     public void Enter()
     {
-        joinGameMenuCanvas.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void Exit()
     {
-        joinGameMenuCanvas.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

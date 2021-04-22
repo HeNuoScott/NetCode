@@ -34,6 +34,7 @@ public class ServerListElement : MonoBehaviour
 
             SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         });
+        gameObject.SetActive(true);
     }
 
     public float GetHostedByColumnTextPreferredWidth()

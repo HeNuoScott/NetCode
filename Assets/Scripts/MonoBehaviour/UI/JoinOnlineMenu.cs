@@ -12,8 +12,6 @@ public class JoinOnlineMenu : MonoBehaviour, IMenu
     [SerializeField] private MenuManager menuManager;
     [SerializeField] private ServerConfiguration serverConfiguration;
 
-    [SerializeField] private Canvas joinOnlineMenuCanvas;
-
     [SerializeField] private TMP_InputField ipInputField;
     [SerializeField] private TMP_InputField portInputField;
     [SerializeField] private Button connectButton;
@@ -57,11 +55,11 @@ public class JoinOnlineMenu : MonoBehaviour, IMenu
     {
         ipInputField.text = "";
         portInputField.text = "";
-        joinOnlineMenuCanvas.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void Exit()
     {
-        joinOnlineMenuCanvas.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

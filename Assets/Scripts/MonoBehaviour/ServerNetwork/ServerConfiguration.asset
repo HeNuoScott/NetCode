@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd28b3357f03e37488d1798a0a818ba6, type: 3}
   m_Name: ServerConfiguration
   m_EditorClassIdentifier: 
-  lanHostName: 
-  listenerPort: 0
-  lanDiscoveryRequest: 
-  lanDiscoveryResponse: 
+  listenerPort: 10000
+  defaultServerPort: 7979
+  defaultHostName: host
+  defaultNumberOfPlayers: 2
+  defaultLaps: 3
+  lanDiscoveryRequest: PING
+  lanDiscoveryResponse: PONG

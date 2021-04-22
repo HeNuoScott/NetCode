@@ -9,8 +9,6 @@ public class JoinLanMenu : MonoBehaviour, IMenu
     [SerializeField] private ServerConfiguration serverConfiguration;
     [SerializeField] private NetworkDiscoverer networkDiscoverer;
 
-    [SerializeField] private Canvas joinLanMenuCanvas;
-
     [SerializeField] private Button refreshButton;
     [SerializeField] private Button cancelButton;
 
@@ -35,12 +33,12 @@ public class JoinLanMenu : MonoBehaviour, IMenu
     public void Enter()
     {
         RefreshServerList();
-        joinLanMenuCanvas.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void Exit()
     {
-        joinLanMenuCanvas.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void RefreshServerList()
