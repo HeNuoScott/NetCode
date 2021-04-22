@@ -13,8 +13,6 @@ public class HostGameMenu : MonoBehaviour, IMenu
     [SerializeField] private MenuManager menuManager;
     [SerializeField] private ServerConfiguration serverConfiguration;
 
-    [SerializeField] private Canvas hostGameMenuCanvas;
-
     [SerializeField] private TMP_InputField hostNameInputField;
     [SerializeField] private TMP_InputField numberOfPlayersInputField;
     [SerializeField] private TMP_InputField lapsInputField;
@@ -74,11 +72,11 @@ public class HostGameMenu : MonoBehaviour, IMenu
         lapsInputField.text = "";
         portInputField.text = "";
         
-        hostGameMenuCanvas.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void Exit()
     {
-        hostGameMenuCanvas.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
