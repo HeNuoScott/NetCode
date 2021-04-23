@@ -50,7 +50,8 @@ public class HostGameMenu : MonoBehaviour, IMenu
                         remoteServerPort = GameSession.serverSession.serverPort
                     };
 
-                    SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+                    //SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+                    SceneManager.LoadScene("TestListener", LoadSceneMode.Single);
                 }
             }
             catch (Exception e)

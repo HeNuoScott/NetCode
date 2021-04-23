@@ -17,13 +17,9 @@ public class JoinLanMenu : MonoBehaviour, IMenu
     public void Init()
     {
         refreshButton.onClick.AddListener(RefreshServerList);
-        
-        cancelButton.onClick.AddListener(() =>
-        {
-            menuManager.SelectMenu<JoinGameMenu>();
-        });
 
-        networkDiscoverer.Init();
+        cancelButton.onClick.AddListener(() => menuManager.SelectMenu<JoinGameMenu>());
+
         networkDiscoverer.OnServerDiscovered += (DiscoveryResult discoveryResult) =>
         {
             serverList.AddElement(discoveryResult);
@@ -32,8 +28,8 @@ public class JoinLanMenu : MonoBehaviour, IMenu
 
     public void Enter()
     {
-        RefreshServerList();
         gameObject.SetActive(true);
+        networkDiscoverer.Discover();
     }
 
     public void Exit()
