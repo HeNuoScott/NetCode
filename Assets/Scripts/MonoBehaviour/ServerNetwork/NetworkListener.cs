@@ -36,20 +36,21 @@ public class NetworkListener : MonoBehaviour
         if (listener.Available > 0)
         {
             IPEndPoint remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-            string receivedMessage = Encoding.ASCII.GetString(listener.Receive(ref remoteEndpoint));
+            string receivedMessage = Encoding.UTF8.GetString(listener.Receive(ref remoteEndpoint));
 
             Debug.Log("Received " + receivedMessage + " from address: " + remoteEndpoint.Address);
 
-            byte[] response = Encoding.ASCII.GetBytes(serverConfiguration.lanDiscoveryResponse + " " + GameSession.serverSession.serverPort + " " + goInGameServerSystem.connectedPlayers + " " + GameSession.serverSession.numberOfPlayers + " " + GameSession.serverSession.laps + " " + GameSession.serverSession.hostName);
+            byte[] response = Encoding.UTF8.GetBytes(serverConfiguration.lanDiscoveryResponse + " " + GameSession.serverSession.serverPort + " " + goInGameServerSystem.connectedPlayers + " " + GameSession.serverSession.numberOfPlayers + " " + GameSession.serverSession.laps + " " + GameSession.serverSession.hostName);
 
             if (goInGameServerSystem.connectedPlayers < GameSession.serverSession.numberOfPlayers && receivedMessage.Equals(serverConfiguration.lanDiscoveryRequest))
             {
+                Debug.Log("response to address: " + remoteEndpoint.Address);
                 listener.Send(response, response.Length, remoteEndpoint);
             }
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         listener.Close();
     }
