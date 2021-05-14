@@ -18,6 +18,7 @@ public class GoInGameServerSystem : ComponentSystem
             freeSpawnLocationIndices.Add(i);
         }
     }
+
     protected override void OnUpdate()
     {
         //UnityEngine.Debug.Log("Server Updata");

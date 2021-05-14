@@ -7,7 +7,16 @@ using Unity.Scenes;
 
 public class GameManager : MonoBehaviour
 {
+    public enum PlayMode
+    {
+        Client,
+        Server,
+        ClientAndServer
+    }
+
     public GameObject ShareData;
+
+    public PlayMode Mode;
 
     private void Start()
     {
